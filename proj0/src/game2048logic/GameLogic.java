@@ -19,11 +19,10 @@ public class GameLogic {
      *              if no merge occurs, then return minR.
      */
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
-        // TODO: Fill this in in tasks 2, 3, 4
         //up task2
         int row = r;
         while (row - 1 >= 0 && board[row - 1][c] == 0 && row - 1 >= minR) { //task4
-            row --;
+            row -= 1;
         }
         int swapValue = board[r][c];
         board[r][c] = board[row][c];
@@ -46,8 +45,7 @@ public class GameLogic {
      * @param c         the column to tilt up.
      */
     public static void tiltColumn(int[][] board, int c) {
-        // TODO: fill this in in task 5
-        int minR = 0;//minR记录合并的位置+1，这个位置就是下一个方块限制到达的最远的位置
+        int minR = 0; //minR记录合并的位置+1，这个位置就是下一个方块限制到达的最远的位置
         for (int r = 0; r < board.length; r += 1) {
             minR = Math.max(minR, moveTileUpAsFarAsPossible(board, r, c, minR));
         }
@@ -60,7 +58,6 @@ public class GameLogic {
      * @param board     the current state of the board.
      */
     public static void tiltUp(int[][] board) {
-        // TODO: fill this in in task 6
         for (int c = 0; c < board.length; c += 1) {
             tiltColumn(board, c);
         }
@@ -75,7 +72,6 @@ public class GameLogic {
      * @param side  the direction to tilt
      */
     public static void tilt(int[][] board, Side side) {
-        // TODO: fill this in in task 7
         if (side == Side.NORTH) {
             tiltUp(board);
             return;

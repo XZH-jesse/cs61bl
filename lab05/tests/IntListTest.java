@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertWithMessage;
 
@@ -153,11 +154,32 @@ public class IntListTest {
 
     @Test
     public void testCatenate() {
-        // TODO: Add tests
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+
+        assertWithMessage("")
+                .that(IntList.catenate(A, B)).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
+        assertWithMessage("")
+                .that(A).isEqualTo(IntList.of(1, 2, 3));
+
+        assertWithMessage("")
+                .that(IntList.catenate(null, B)).isEqualTo(IntList.of(4, 5, 6));
+
+
+        assertWithMessage("")
+                .that(IntList.catenate(A, null)).isEqualTo(IntList.of(1, 2, 3));
+        assertWithMessage("")
+                .that(A).isEqualTo(IntList.of(1, 2, 3));
     }
 
     @Test
     public void testDCatenate() {
-        // TODO: Add test
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+
+        assertWithMessage("")
+                .that(IntList.dcatenate(A, B)).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
+        assertWithMessage("")
+                .that(A).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
     }
 }

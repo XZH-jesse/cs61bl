@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.In;
+
 /** A data structure to represent a Linked List of Integers.
  * Each IntList represents one node in the overall Linked List.
  */
@@ -47,8 +49,16 @@ public class IntList {
      * @return The element at [position]
      */
     public int get(int position) {
-        // TODO: YOUR CODE HERE
-        return -1;
+        IntList curr = this;
+        int currPosition = 0;
+        while (currPosition < position && curr.next != null) {
+            currPosition += 1;
+            curr = curr.next;
+        }
+        if (currPosition != position) {
+            throw new IllegalArgumentException("YOUR MESSAGE HERE");
+        }
+        return curr.item;
     }
 
     /**
@@ -58,8 +68,14 @@ public class IntList {
      * @return The String representation of the list.
      */
     public String toString() {
-        // TODO: YOUR CODE HERE
-        return null;
+        String stringList = "";
+        IntList curr = this;
+        while (curr.next != null) {
+            stringList = stringList + curr.item + " ";
+            curr = curr.next;
+        }
+        stringList = stringList + curr.item;
+        return stringList;
     }
 
     /**
@@ -81,8 +97,19 @@ public class IntList {
             return false;
         }
         if (obj instanceof IntList otherList) {
-            // TODO: your code here
-
+            IntList a = this;
+            IntList b = otherList;
+            while (a != null && b != null) {
+                if (a.item != b.item) {
+                    return false;
+                } else {
+                    a = a.next;
+                    b = b.next;
+                }
+            }
+            if (a == null && b == null) {
+                return true;
+            }
         }
         return false;
     }
@@ -93,7 +120,11 @@ public class IntList {
      * @param value, the int to be added.
      */
     public void add(int value) {
-        // TODO: YOUR CODE HERE
+        IntList curr = this;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        curr.next = new IntList(value, null);
     }
 
     /**
@@ -102,8 +133,15 @@ public class IntList {
      * @return smallest element in the list
      */
     public int smallest() {
-        // TODO: YOUR CODE HERE
-        return -1;
+        int smallest = this.item;
+        IntList p = this;
+        while (p != null) {
+            if (p.item < smallest) {
+                smallest = p.item;
+            }
+            p = p.next;
+        }
+        return smallest;
     }
 
     /**
@@ -112,8 +150,13 @@ public class IntList {
      * @return The sum of squares of all elements.
      */
     public int squaredSum() {
-        // TODO: YOUR CODE HERE
-        return -1;
+        IntList p = this;
+        int sumOfList = 0;
+        while (p != null) {
+            sumOfList += p.item * p.item;
+            p = p.next;
+        }
+        return sumOfList;
     }
 
     /**
@@ -170,8 +213,33 @@ public class IntList {
      * @return new list with A followed by B.
      */
     public static IntList catenate(IntList A, IntList B) {
-        // TODO: YOUR CODE HERE
-        return null;
+        IntList p = null;
+
+        IntList pa = null;
+        IntList pb = null;
+
+        if (A != null) {
+            p = new IntList(A.item, null);
+            pa = A.next;
+            while (pa != null) {
+                p.add(pa.item);
+                pa = pa.next;
+            }
+        }
+
+        if (B != null) {
+            if (p == null) {
+                p = new IntList(B.item, null);
+                pb = B.next;
+            } else {
+                pb = B;
+            }
+            while (pb != null) {
+                p.add(pb.item);
+                pb = pb.next;
+            }
+        }
+        return p;
     }
 
     /**
@@ -183,7 +251,11 @@ public class IntList {
      * @return new list with A followed by B.
      */
     public static IntList dcatenate(IntList A, IntList B) {
-        // TODO: YOUR CODE HERE
-        return null;
+        IntList p = A;
+        while (p.next != null) {
+            p = p.next;
+        }
+        p.next = B;
+        return A;
     }
 }

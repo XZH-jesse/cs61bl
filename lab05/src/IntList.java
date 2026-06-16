@@ -251,11 +251,18 @@ public class IntList {
      * @return new list with A followed by B.
      */
     public static IntList dcatenate(IntList A, IntList B) {
-        IntList p = A;
-        while (p.next != null) {
+        if (A == null) {
+            A = B;
+            return A;
+        }
+        if (B == null) {
+            return A;
+        }
+        IntList p = B;
+        while (p != null) {
+            A.add(p.item);
             p = p.next;
         }
-        p.next = B;
         return A;
     }
 }

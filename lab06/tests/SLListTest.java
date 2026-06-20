@@ -1,3 +1,4 @@
+import org.apache.bcel.verifier.statics.IntList;
 import org.junit.Test;
 
 import static com.google.common.truth.Truth.*;
@@ -26,6 +27,18 @@ public class SLListTest {
 
     @Test
     public void testSLListReverse() {
-        // TODO: Add tests
+        SLList test1 = SLList.of(1, 2, 3, 4, 5); /* test1: {1, 3, 5} */
+        test1.reverse();
+        assertWithMessage("").that(test1).isEqualTo(SLList.of(5, 4, 3, 2, 1));
+
+        SLList test2 = SLList.of(1); /* test1: {1, 3, 5} */
+        test1.reverse();
+        assertWithMessage("").that(test2).isEqualTo(SLList.of(1));
+
+        SLList test3 = SLList.of(); /* test1: {1, 3, 5} */
+        test1.reverse();
+        assertWithMessage("").that(test3).isEqualTo(SLList.of());
     }
+
+
 }

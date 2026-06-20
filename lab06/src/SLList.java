@@ -1,3 +1,5 @@
+import org.apache.bcel.verifier.statics.IntList;
+
 /**
  * An SLList is a list of integers, which encapsulates the
  * naked linked list structure.
@@ -114,11 +116,33 @@ public class SLList {
 
     /** Adds x to the list at the specified index. */
     public void add(int index, int x) {
-        // TODO: YOUR CODE HERE
+        if (index > this.size()) {
+            index = this.size;
+        }
+        IntListNode curr = sentinel;
+        while (index > 0) {
+            index -= 1;
+            curr = curr.next;
+        }
+        curr.next = new IntListNode(x, curr.next);
+        size += 1;
     }
 
     /** Destructively reverses this list. */
     public void reverse() {
-        // TODO: YOUR CODE HERE
+        if (this.size() <= 1) {
+            return;
+        }
+        IntListNode newHead = reverseHelper(sentinel.next);
+        sentinel.next = newHead;
+        return;
+    }
+
+    public IntListNode reverseHelper(IntListNode L) {
+        if (L.next == sentinel) return L;
+        IntListNode temp = reverseHelper(L.next);
+        L.next.next = L;
+        L.next = sentinel;
+        return temp;
     }
 }
